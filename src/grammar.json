@@ -5,15 +5,23 @@
       "type": "REPEAT",
       "content": {
         "type": "SYMBOL",
-        "name": "statement"
+        "name": "_line"
       }
     },
-    "statement": {
+    "_line": {
       "type": "SEQ",
       "members": [
         {
-          "type": "SYMBOL",
-          "name": "command"
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "statement"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "CHOICE",
@@ -30,12 +38,106 @@
         }
       ]
     },
-    "command": {
+    "statement": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
+          "name": "comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "mode"
+        },
+        {
+          "type": "SYMBOL",
           "name": "class"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "rule"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "test"
+        }
+      ]
+    },
+    "comment": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "#"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[^;\\n]+"
+        }
+      ]
+    },
+    "mode": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "~"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "<"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[^>;\\n]+"
+                },
+                {
+                  "type": "STRING",
+                  "value": ">"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "/"
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[^>;\\n]+"
+                },
+                {
+                  "type": "STRING",
+                  "value": "/"
+                }
+              ]
+            },
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "["
+                },
+                {
+                  "type": "PATTERN",
+                  "value": "[^>;\\n]+"
+                },
+                {
+                  "type": "STRING",
+                  "value": "]"
+                }
+              ]
+            }
+          ]
         }
       ]
     },
@@ -48,7 +150,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "identifier"
+          "name": "name"
         },
         {
           "type": "STRING",
@@ -60,9 +162,72 @@
         }
       ]
     },
-    "identifier": {
+    "rule": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "positive"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "negative"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "regex"
+        }
+      ]
+    },
+    "test": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "?"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "positive"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "negative"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "word"
+          }
+        }
+      ]
+    },
+    "positive": {
+      "type": "STRING",
+      "value": "+"
+    },
+    "negative": {
+      "type": "STRING",
+      "value": "!"
+    },
+    "name": {
       "type": "PATTERN",
       "value": "\\w+"
+    },
+    "word": {
+      "type": "PATTERN",
+      "value": "[^;\\n]+"
     },
     "regex": {
       "type": "PATTERN",

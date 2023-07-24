@@ -2,35 +2,64 @@
 idk something
 ==================
 
-$A =[bciawd]
+# comment here
+~ <something name>
+
+# another comment; $A =[bciawd]
 $bc= <A>;
-$bc=<A>;
+$ bc=<A>;
+      ! bruh;++++
+      ?+ bruh some test
+;;?!another test
 
 ---
 
 (source_file
+    (statement (comment))
     (statement
-        (command
-            (class
-                (identifier)
-                (regex)
-            )
+        (mode)
+    )
+    (statement (comment))
+    (statement
+        (class
+            (name)
+            (regex)
         )
     )
     (statement
-        (command
-            (class
-                (identifier)
-                (regex)
-            )
+        (class
+            (name)
+            (regex)
         )
     )
     (statement
-        (command
-            (class
-                (identifier)
-                (regex)
-            )
+        (class
+            (name)
+            (regex)
+        )
+    )
+    (statement
+        (rule
+            (negative)
+            (regex)
+        )
+    )
+    (statement
+        (rule
+            (positive)
+            (regex)
+        )
+    )
+    (statement
+        (test
+            (positive)
+            (word)
+        )
+    )
+    (statement
+        (test
+            (negative)
+            (word)
         )
     )
 )
