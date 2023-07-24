@@ -2,7 +2,7 @@
   "name": "tree-sitter-phonet",
   "version": "1.0.0",
   "description": "Tree Sitter Neovim parser for Phonet",
-  "main": "index.js",
+  "main": "bindings/node",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,6 +20,6 @@
     "nan": "^2.17.0"
   },
   "devDependencies": {
-      "tree-sitter-cli": "^0.20.8"
+    "tree-sitter-cli": "^0.20.8"
   }
 }

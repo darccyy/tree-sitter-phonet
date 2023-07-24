@@ -1,0 +1,37 @@
+==================
+idk something
+==================
+
+$A =[bciawd]
+$bc= <A>;
+$bc=<A>;
+
+---
+
+(source_file
+    (statement
+        (command
+            (class
+                (identifier)
+                (regex)
+            )
+        )
+    )
+    (statement
+        (command
+            (class
+                (identifier)
+                (regex)
+            )
+        )
+    )
+    (statement
+        (command
+            (class
+                (identifier)
+                (regex)
+            )
+        )
+    )
+)
+
