@@ -23,12 +23,11 @@ module.exports = grammar({
         mode: $ => seq(
             "~",
             choice(
-                seq("<", $.mode_text, ">"),
-                seq("/", $.mode_text, "/"),
-                seq("[", $.mode_text, "]"),
+                seq("<", $.text, ">"),
+                seq("/", $.text, "/"),
+                seq("[", $.text, "]"),
             ),
         ),
-        mode_text: $ => /[^>;\n]+/,
 
         class: $ => seq(
             $.class_symbol,
@@ -40,9 +39,8 @@ module.exports = grammar({
 
         note: $ => seq(
             '*',
-            $.note_text,
+            $.text,
         ),
-        note_text: $ => /[\w ]+/,
 
         rule: $ => seq(
             choice($.positive, $.negative),
@@ -52,14 +50,15 @@ module.exports = grammar({
         test: $ => seq(
             "?",
             choice($.positive, $.negative),
-            repeat($.word),
+            repeat($.test_word),
         ),
+        test_word: $ => /\w+/,
 
         positive: $ => "+",
         negative: $ => "!",
 
         name: $ => /\w+/,
-        word: $ => /\w+/,
+        text: $ => /[\w,. ]+/,
 
         regex: $ => seq(
             choice(
@@ -69,7 +68,13 @@ module.exports = grammar({
             ),
             optional($.regex),
         ),
-        regex_symbol: $ => choice('|', '[', ']'),
+        regex_symbol: $ => choice(
+            '|', '^', '$',
+            '*', '+', '?',
+            '[', ']', '(', ')',
+            /\(\?[:=<!]{1,2}/, // this is wrong
+            /\{\d*,?\d*\}/,
+        ),
         regex_name: $ => seq('<', $.name, '>'),
         regex_other: $ => /\w/,
     }

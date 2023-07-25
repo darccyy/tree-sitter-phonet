@@ -23,6 +23,11 @@
     }
   },
   {
+    "type": "class_symbol",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "comment",
     "named": true,
     "fields": {}
@@ -36,7 +41,7 @@
       "required": true,
       "types": [
         {
-          "type": "mode_text",
+          "type": "text",
           "named": true
         }
       ]
@@ -56,11 +61,16 @@
       "required": true,
       "types": [
         {
-          "type": "note_text",
+          "type": "text",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "positive",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "regex",
@@ -199,14 +209,14 @@
           "named": true
         },
         {
-          "type": "word",
+          "type": "test_word",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "word",
+    "type": "test_word",
     "named": true,
     "fields": {}
   },
@@ -219,7 +229,23 @@
     "named": false
   },
   {
+    "type": "$",
+    "named": false
+  },
+  {
+    "type": "(",
+    "named": false
+  },
+  {
+    "type": ")",
+    "named": false
+  },
+  {
     "type": "*",
+    "named": false
+  },
+  {
+    "type": "+",
     "named": false
   },
   {
@@ -255,27 +281,19 @@
     "named": false
   },
   {
-    "type": "class_symbol",
-    "named": true
-  },
-  {
-    "type": "mode_text",
-    "named": true
+    "type": "^",
+    "named": false
   },
   {
     "type": "negative",
     "named": true
   },
   {
-    "type": "note_text",
-    "named": true
-  },
-  {
-    "type": "positive",
-    "named": true
-  },
-  {
     "type": "regex_other",
+    "named": true
+  },
+  {
+    "type": "text",
     "named": true
   },
   {

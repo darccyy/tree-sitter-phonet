@@ -99,7 +99,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "mode_text"
+                  "name": "text"
                 },
                 {
                   "type": "STRING",
@@ -116,7 +116,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "mode_text"
+                  "name": "text"
                 },
                 {
                   "type": "STRING",
@@ -133,7 +133,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "mode_text"
+                  "name": "text"
                 },
                 {
                   "type": "STRING",
@@ -144,10 +144,6 @@
           ]
         }
       ]
-    },
-    "mode_text": {
-      "type": "PATTERN",
-      "value": "[^>;\\n]+"
     },
     "class": {
       "type": "SEQ",
@@ -183,13 +179,9 @@
         },
         {
           "type": "SYMBOL",
-          "name": "note_text"
+          "name": "text"
         }
       ]
-    },
-    "note_text": {
-      "type": "PATTERN",
-      "value": "[\\w ]+"
     },
     "rule": {
       "type": "SEQ",
@@ -237,10 +229,14 @@
           "type": "REPEAT",
           "content": {
             "type": "SYMBOL",
-            "name": "word"
+            "name": "test_word"
           }
         }
       ]
+    },
+    "test_word": {
+      "type": "PATTERN",
+      "value": "\\w+"
     },
     "positive": {
       "type": "STRING",
@@ -254,9 +250,9 @@
       "type": "PATTERN",
       "value": "\\w+"
     },
-    "word": {
+    "text": {
       "type": "PATTERN",
-      "value": "\\w+"
+      "value": "[\\w,. ]+"
     },
     "regex": {
       "type": "SEQ",
@@ -301,11 +297,47 @@
         },
         {
           "type": "STRING",
+          "value": "^"
+        },
+        {
+          "type": "STRING",
+          "value": "$"
+        },
+        {
+          "type": "STRING",
+          "value": "*"
+        },
+        {
+          "type": "STRING",
+          "value": "+"
+        },
+        {
+          "type": "STRING",
+          "value": "?"
+        },
+        {
+          "type": "STRING",
           "value": "["
         },
         {
           "type": "STRING",
           "value": "]"
+        },
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\(\\?[:=<!]{1,2}"
+        },
+        {
+          "type": "PATTERN",
+          "value": "\\{\\d*,?\\d*\\}"
         }
       ]
     },
