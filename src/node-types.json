@@ -8,6 +8,10 @@
       "required": true,
       "types": [
         {
+          "type": "class_symbol",
+          "named": true
+        },
+        {
           "type": "name",
           "named": true
         },
@@ -26,10 +30,82 @@
   {
     "type": "mode",
     "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "mode_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "name",
+    "named": true,
     "fields": {}
   },
   {
+    "type": "note",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "note_text",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "regex",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "regex",
+          "named": true
+        },
+        {
+          "type": "regex_name",
+          "named": true
+        },
+        {
+          "type": "regex_other",
+          "named": true
+        },
+        {
+          "type": "regex_symbol",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "regex_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "regex_symbol",
     "named": true,
     "fields": {}
   },
@@ -92,6 +168,10 @@
           "named": true
         },
         {
+          "type": "note",
+          "named": true
+        },
+        {
           "type": "rule",
           "named": true
         },
@@ -139,7 +219,7 @@
     "named": false
   },
   {
-    "type": "$",
+    "type": "*",
     "named": false
   },
   {
@@ -175,7 +255,11 @@
     "named": false
   },
   {
-    "type": "name",
+    "type": "class_symbol",
+    "named": true
+  },
+  {
+    "type": "mode_text",
     "named": true
   },
   {
@@ -183,8 +267,20 @@
     "named": true
   },
   {
+    "type": "note_text",
+    "named": true
+  },
+  {
     "type": "positive",
     "named": true
+  },
+  {
+    "type": "regex_other",
+    "named": true
+  },
+  {
+    "type": "|",
+    "named": false
   },
   {
     "type": "~",

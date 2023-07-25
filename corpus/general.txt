@@ -11,6 +11,7 @@ $ bc=<A>;
       ! bruh;++++
       ?+ bruh some test
 ;;?!another test
+?+ another
 
 ---
 
@@ -59,6 +60,12 @@ $ bc=<A>;
     (statement
         (test
             (negative)
+            (word)
+        )
+    )
+    (statement
+        (test
+            (positive)
             (word)
         )
     )

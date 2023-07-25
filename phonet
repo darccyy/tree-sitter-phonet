@@ -1,7 +1,10 @@
-~ < random file test>
+~<random file test>
 
 # comment here
-$C = [some regex|somethign];
+$C = |a[some regex||somethign][];
 
-! bruh
+* bruh something
+    ! bruh<C>aoij[123]2io
+        ?+ bruh bruh
+        ?! bruh bruh
 

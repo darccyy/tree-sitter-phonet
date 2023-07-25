@@ -27,7 +27,10 @@
           "scope": "source.json",
           "file-types": [
               "phonet"
-          ]
+          ],
+          "theme": {
+                "something": "#F0F"
+          }
       }
   ]
 }

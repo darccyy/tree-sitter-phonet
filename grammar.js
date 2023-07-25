@@ -6,34 +6,43 @@ module.exports = grammar({
 
         _line: $ => seq(
             optional($.statement),
-            choice('\n', ';'),
+            choice("\n", ";"),
         ),
 
         statement: $ => choice(
             $.comment,
             $.mode,
             $.class,
+            $.note,
             $.rule,
             $.test,
         ),
 
-        comment: $ => seq('#', /[^;\n]+/),
+        comment: $ => seq("#", /[^;\n]+/),
 
         mode: $ => seq(
-            '~',
+            "~",
             choice(
-                seq('<', /[^>;\n]+/, '>'),
-                seq('/', /[^>;\n]+/, '/'),
-                seq('[', /[^>;\n]+/, ']'),
+                seq("<", $.mode_text, ">"),
+                seq("/", $.mode_text, "/"),
+                seq("[", $.mode_text, "]"),
             ),
         ),
+        mode_text: $ => /[^>;\n]+/,
 
         class: $ => seq(
-            '$',
+            $.class_symbol,
             $.name,
-            '=',
+            "=",
             $.regex,
         ),
+        class_symbol: $ => '$',
+
+        note: $ => seq(
+            '*',
+            $.note_text,
+        ),
+        note_text: $ => /[\w ]+/,
 
         rule: $ => seq(
             choice($.positive, $.negative),
@@ -41,18 +50,28 @@ module.exports = grammar({
         ),
 
         test: $ => seq(
-            '?',
+            "?",
             choice($.positive, $.negative),
             repeat($.word),
         ),
 
-        positive: $ => '+',
-        negative: $ => '!',
+        positive: $ => "+",
+        negative: $ => "!",
 
         name: $ => /\w+/,
-        word: $ => /[^;\n]+/,
+        word: $ => /\w+/,
 
-        regex: $ => /[^;\n]+/,
+        regex: $ => seq(
+            choice(
+                $.regex_symbol,
+                $.regex_name,
+                $.regex_other,
+            ),
+            optional($.regex),
+        ),
+        regex_symbol: $ => choice('|', '[', ']'),
+        regex_name: $ => seq('<', $.name, '>'),
+        regex_other: $ => /\w/,
     }
 });
 
