@@ -4,11 +4,14 @@ module.exports = grammar({
     rules: {
         source_file: $ => repeat($._line),
 
+        // Statement including semicolon or linebreak
         _line: $ => seq(
             optional($.statement),
-            choice("\n", ";"),
+            choice("\n", $.semicolon),
         ),
+        semicolon: $ => ";",
 
+        // Command statement
         statement: $ => choice(
             $.comment,
             $.mode,
@@ -18,8 +21,13 @@ module.exports = grammar({
             $.test,
         ),
 
+        // Comment statement
         comment: $ => seq("#", /[^;\n]+/),
 
+        // Any text, for mode and notes
+        text: $ => /[\w,. ]+/,
+
+        // Mode statement
         mode: $ => seq(
             "~",
             choice(
@@ -29,54 +37,77 @@ module.exports = grammar({
             ),
         ),
 
+        // Class definition statement
         class: $ => seq(
-            $.class_symbol,
-            $.name,
-            "=",
+            $.class_ident,
+            $.class_name,
+            $.class_equals,
             $.regex,
         ),
-        class_symbol: $ => '$',
+        class_ident: $ => "$",
+        class_equals: $ => "=",
+        // Class name
+        class_name: $ => /\w+/,
 
+        // Note statement
         note: $ => seq(
-            '*',
+            $.note_ident,
             $.text,
         ),
+        note_ident: $ => "*",
 
+        // For rules and tests
+        positive_ident: $ => "+",
+        negative_ident: $ => "!",
+
+        // Rule definition statement
         rule: $ => seq(
-            choice($.positive, $.negative),
+            choice($.positive_ident, $.negative_ident),
             $.regex,
         ),
 
+        // Test statement
         test: $ => seq(
-            "?",
-            choice($.positive, $.negative),
+            $.test_ident,
+            choice($.positive_ident, $.negative_ident),
             repeat($.test_word),
         ),
+        test_ident: $ => "?",
         test_word: $ => /\w+/,
 
-        positive: $ => "+",
-        negative: $ => "!",
-
-        name: $ => /\w+/,
-        text: $ => /[\w,. ]+/,
-
-        regex: $ => seq(
+        // Wrapper for recursive name
+        regex: $ => $._regex_recurse,
+        // Recursively parse regex string
+        _regex_recurse: $ => seq(
             choice(
-                $.regex_symbol,
-                $.regex_name,
-                $.regex_other,
+                $.regex_class,
+                $.regex_special,
+                $.regex_literal,
             ),
-            optional($.regex),
+            optional($._regex_recurse), // Recurse
         ),
-        regex_symbol: $ => choice(
-            '|', '^', '$',
-            '*', '+', '?',
-            '[', ']', '(', ')',
-            /\(\?[:=<!]{1,2}/, // this is wrong
+        // Class name
+        regex_class: $ => seq("<", $.class_name, ">"),
+        // Literal characters
+        regex_literal: $ => /\w+/,
+        // Special regex character
+        regex_special: $ => choice(
+            // Misc. symbols
+            "|", ".", "^", "$",
+            "*", "+", "?",
+            "[", "]", "(", ")",
+            // Escaped character
+            /\\./,
+            // Repeated patterns with {curly braces}
             /\{\d*,?\d*\}/,
+            // Look-arounds
+            /\(\?(<?[!=]|:)/,
+            // Named group definition
+            seq(/\(\?/, $._regex_named_group),
+            // Named group reference
+            seq(/\\k/, $._regex_named_group),
         ),
-        regex_name: $ => seq('<', $.name, '>'),
-        regex_other: $ => /\w/,
+        _regex_named_group: $ => /<\w+>|"\w+"/,
     }
 });
 

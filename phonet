@@ -2,6 +2,7 @@
 
 # comment here
 $C = |a[some regex||somethign][];
++ (?'a' ) \k'a' aiwdo (?'a') (?<a>) \k<a>
 
 * bruh something
     ! bruh<C>aoij[123]2io

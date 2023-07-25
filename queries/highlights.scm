@@ -1,21 +1,21 @@
-(comment) @comment
+(comment)           @comment
+(semicolon)         @operator
+(text)              @text
 
-(text) @text
+(mode)              @operator
 
-(mode) @operator
+(class_ident)       @operator
+(class_equals)      @operator
+(class_name)        @number
 
-(class_symbol) @operator
-(name) @number
+(positive_ident)    @constructor
+(negative_ident)    @function.builtin
 
-(note) @operator
+(note_ident)        @operator
 
-(positive) @constructor
-(negative) @function.builtin
+(test_ident)        @keyword
+(test_word)         @string
 
-(test) @keyword
-(test_word) @string
-
-(regex_name) @operator
-(regex_symbol) @operator
-
+(regex_class)       @operator
+(regex_special)     @operator
 
