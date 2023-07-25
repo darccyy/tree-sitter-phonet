@@ -1,0 +1,2 @@
+(comment) @comment
+(mode) @string
