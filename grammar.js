@@ -24,17 +24,17 @@ module.exports = grammar({
         // Comment statement
         comment: $ => seq("#", /[^;\n]+/),
 
-        // Any text, for mode and notes
-        text: $ => /[\w,. ]+/,
+        // Any text, for mode and notes (CAN MATCH NOTHING)
+        text: $ => /[\w,. ]*/,
 
         // Mode statement
         mode: $ => seq(
             "~",
-            choice(
+            optional(choice(
                 seq("<", $.text, ">"),
                 seq("/", $.text, "/"),
                 seq("[", $.text, "]"),
-            ),
+            )),
         ),
 
         // Class definition statement
